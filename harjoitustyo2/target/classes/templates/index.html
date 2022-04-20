@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>Game Database</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<style> 
+body {
+ 	background-image: url("https://img.freepik.com/free-vector/hexagonal-technology-pattern-mesh-background-with-text-space_1017-26293.jpg?t=st=1650471647~exp=1650472247~hmac=fae8cd3bb60a33bd93e17ac9af36c36f8e5d7ac20bef954f9fbf3db808a4074a&w=1380");
+	background-repeat: no-repeat;
+ 	background-attachment: fixed;
+ 	background-size: cover;
+}
+</style>
+<body>
+	<h1>Welcome to game Database!</h1>
+
+	<a href="/guestview" class="btn btn-primary">Show All Games as a guest</a>
+	<div style="clear: both; display: block; height: 1em;"></div>
+	
+	
+	<a sec:authorize="isAnonymous()" href="/login" class="btn btn-primary">Sign In</a>
+	<div style="clear: both; display: block; height: 1em;"></div>
+	<!--  
+	<div>
+		<form sec:authorize="hasAuthority('ADMIN')" th:action="@{/logout}"
+			method="post">
+			<input type="submit" class="btn btn-danger" value="Sign Out" />
+		</form>
+	</div>
+	-->
+</body>
+</html>

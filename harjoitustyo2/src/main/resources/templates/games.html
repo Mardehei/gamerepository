@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style> 
+body {
+  background-color: #cccccc;
+}
+div {
+	background-color: #f2f2f2;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-left: 10px
+}
+</style>
+<title>Games</title>
+</head>
+<body >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
+	<a class="navbar-brand" href="/games">Games</a>
+	<a class="navbar-brand" href="/genrelist">Genres</a>
+
+		<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+			<button type="submit" class="btn btn-secondary my-2 my-sm-0">SIGN OUT</button>
+		</form>
+
+</nav>
+	<h3 th:inline="text">Welcome 
+		[[${#httpServletRequest.remoteUser}]]
+		<a href="addgame" class="btn btn-success">Add new game</a>
+	</h3>
+	<div>
+	<table class="table table-striped">
+	<tbody>
+		<tr>
+			<th>NAME</th>
+			<th>DESCRIPTION</th>
+			<th>NUMBER OF PLAYERS</th>
+			<th>GAMETIME IN MINUTES</th>
+			<th>GENRE</th>
+			<th>GAMETYPE</th>
+		</tr>
+
+		<tr th:each = "game : ${games}">
+			<td th:text="${game.name}"></td>
+			<td th:text="${game.description}"></td>
+			<td th:text="${game.maxNumberOfPlayers}"></td>
+			<td th:text="${game.timeOfGame}"></td>
+			<td th:text="${game.genre.name}"></td>
+			<td th:text="${game.gametype.name}"></td>
+			<td sec:authorize="hasAuthority('USER')"><a th:href="@{/delete/{id}(id=${game.id})}" class="btn btn-xs btn-danger">Delete</a></td>  	
+			<td><a th:href="@{/editgame{id}(id=${game.id})}" class="btn btn-primary">Edit</a></td>
+		</tr>
+	</tbody>
+	</table>	
+	
+</div>
+</body>
+</html>
